@@ -60,4 +60,5 @@ generator_definitions:
     query: drained_circuit_bgp_sessions
     parameters:
       circuit_id: "circuit_id__value"
-
+schemas:
+  - schemas/room.yml
