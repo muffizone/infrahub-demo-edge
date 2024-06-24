@@ -61,4 +61,4 @@ generator_definitions:
     parameters:
       circuit_id: "circuit_id__value"
 schemas:
-  - schemas/room.yml
+  - schemas/base/

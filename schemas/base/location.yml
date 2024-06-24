@@ -1,7 +1,115 @@
 # yaml-language-server: $schema=https://schema.infrahub.app/infrahub/schema/latest.json
 ---
 version: "1.0"
+generics:
+  - name: Generic # Location
+    namespace: Location
+    description: "Generic hierarchical location"
+    label: "Location"
+    hierarchical: true
+    icon: "mingcute:location-line"
+    human_friendly_id: ["name__value"]
+    include_in_menu: true
+    attributes:
+      - name: name
+        kind: Text
+        unique: true
+      - name: description
+        kind: Text
+        optional: true
+
 nodes:
+  # --------------------  Location (Continent, Country, Site, Room, Rack)  --------------------
+  - name: Continent
+    namespace: Location
+    description: "A continent on planet earth."
+    menu_placement: "LocationGeneric"
+    icon: "jam:world"
+    inherit_from:
+      - "LocationGeneric"
+    default_filter: "name__value"
+    order_by:
+      - "name__value"
+    display_labels:
+      - "name__value"
+    children: "LocationCountry"
+    parent: ""
+  - name: Country
+    namespace: Location
+    description: "A country within a continent."
+    menu_placement: "LocationGeneric"
+    icon: "gis:search-country"
+    inherit_from:
+      - "LocationGeneric"
+    default_filter: "name__value"
+    order_by:
+      - "name__value"
+    display_labels:
+      - "name__value"
+    children: "LocationSite"
+    parent: "LocationContinent"
+  - name: SiteType
+    namespace: Location
+    description: "Type of site"
+    menu_placement: "LocationGeneric"
+    icon: "mdi:office-building-cog"
+    inherit_from:
+      - "LocationGeneric"
+    default_filter: "name__value"
+    order_by:
+      - "name__value"
+    display_labels:
+      - "name__value"
+  - name: Site
+    namespace: Location
+    description: "A site within a country."
+    menu_placement: "LocationGeneric"
+    icon: "ri:building-line"
+    inherit_from:
+      - "LocationGeneric"
+    default_filter: "name__value"
+    order_by:
+      - "name__value"
+    display_labels:
+      - "name__value"
+    children: "LocationRack"
+    parent: "LocationCountry"
+    attributes:
+      - name: city
+        kind: Text
+        optional: true
+      - name: address
+        kind: Text
+        optional: true
+      - name: contact
+        kind: Text
+        optional: true
+    relationships:
+      - name: devices
+        identifier: "site__devices"
+        cardinality: many
+        peer: InfraDevice
+        kind: Component
+      - name: vlans
+        identifier: "site__vlans"
+        cardinality: many
+        kind: Component
+        peer: InfraVLAN
+      - name: circuit_endpoints
+        identifier: "site__circuit_endpoints"
+        cardinality: many
+        kind: Component
+        peer: InfraCircuitEndpoint
+      - cardinality: many
+        kind: Attribute
+        name: tags
+        optional: true
+        peer: BuiltinTag
+      - name: site_type
+        identifier: "site__type"
+        cardinality: one
+        peer: LocationSiteType
+        kind: Attribute
   - name: Room
     label: "Room"
     icon: "mdi:dns"
