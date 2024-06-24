@@ -48,7 +48,7 @@ nodes:
       - "name__value"
     children: "LocationSite"
     parent: "LocationContinent"
-  - name: SiteType
+  - name: Type
     namespace: Location
     description: "Type of site"
     menu_placement: "LocationGeneric"
@@ -78,10 +78,54 @@ nodes:
       - name: city
         kind: Text
         optional: true
-      - name: address
+      - name: physical_address
         kind: Text
         optional: true
+      - name: shipping_address
+        kind: Text
+        optional: true
+      - name: gps_coordinates
+        kind: Text
+        optional: true
+      - name: helper_address
+        kind: IPHost
+        optional: true
       - name: contact
+        kind: Text
+        optional: true
+      - name: alias
+        kind: Text
+        optional: false
+      - name: cmdb_label
+        kind: Text
+        optional: true
+      - name: communities
+        kind: Text
+        optional: true
+      - name: activated_date
+        kind: DateTime
+        optional: false
+      - name: status
+        kind: Dropdown
+        optional: false
+        choices:
+          - name: active
+            label: Active
+            description: "Fully operational and currently in service"
+            color: "#7fbf7f"
+          - name: provisioning
+            label: Provisioning
+            description: "In the process of being set up and configured"
+            color: "#ffff7f"
+          - name: maintenance
+            label: Maintenance
+            description: "Undergoing routine maintenance or repairs"
+            color: "#ffd27f"
+          - name: drained
+            label: Drained
+            description: "Temporarily taken out of service"
+            color: "#bfbfbf"
+      - name: description
         kind: Text
         optional: true
     relationships:
@@ -108,7 +152,7 @@ nodes:
       - name: site_type
         identifier: "site__type"
         cardinality: one
-        peer: LocationSiteType
+        peer: LocationType
         kind: Attribute
   - name: Room
     label: "Room"
@@ -162,7 +206,6 @@ nodes:
       - "LocationGeneric"
     order_by:
       - "site__name__value"
-      - "rack__name__value"
       - "name__value"
     display_labels:
       - "name__value"
@@ -170,7 +213,7 @@ nodes:
     children: ""
     uniqueness_constraints:
       - ["site", "room", "name__value"]
-    human_friendly_id: ["site__name__value", "rack__name__value", "name__value"]
+    human_friendly_id: ["site__name__value", "name__value"]
     attributes:
       - name: name
         kind: Text
