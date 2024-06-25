@@ -158,7 +158,7 @@ nodes:
         cardinality: one
         kind: Attribute
       - name: device
-        peer: InfraDevice
+        peer: InfraSwitch
         optional: false
         cardinality: one
       - name: peer_group
