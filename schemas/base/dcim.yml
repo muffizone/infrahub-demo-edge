@@ -338,11 +338,46 @@ nodes:
         default_value: "server"
         optional: true
         choices:
-          - name: console
-            label: Console
-            description: "Console server"
+          - name: server
+            label: Server
+            description: "Edge server/caches"
             color: "#bf7f7f"
-
+  - name: PatchPanel
+    namespace: Infra
+    description: "Generic Patch Panel object"
+    label: "Patch Panel"
+    icon: "arcticons:9-patch-editor"
+    menu_placement: "InfraDevice"
+    inherit_from:
+      - "InfraDevice"
+    attributes:
+      - name: device_type
+        kind: Dropdown
+        default_value: "patch_panel"
+        optional: true
+        choices:
+          - name: patch_panel
+            label: Patch Panel
+            description: "Patch Panels"
+            color: "#ffa07a"
+  - name: LockBox
+    namespace: Infra
+    description: "Generic LockBox object"
+    label: "Lock Box"
+    icon: "material-symbols:lock"
+    menu_placement: "InfraDevice"
+    inherit_from:
+      - "InfraDevice"
+    attributes:
+      - name: device_type
+        kind: Dropdown
+        default_value: "patch_panel"
+        optional: true
+        choices:
+          - name: lock_box
+            label: LockBox
+            description: "Lock Boxes"
+            color: "#aeeeee"
   - name: InterfaceL3
     namespace: Infra
     description: "Network Layer 3 Interface"
@@ -498,7 +533,6 @@ nodes:
     description: "A Platform represents the type of software running on a device"
     label: "Platform"
     icon: "mdi:application-cog-outline"
-    menu_placement: "InfraDevice"
     default_filter: name__value
     human_friendly_id: ["name__value"]
     order_by:
@@ -534,7 +568,7 @@ nodes:
     description: "A Model represents the type of hardware running on a device"
     label: "Model"
     icon: "mdi:router"
-    menu_placement: "InfraDevice"
+    menu_placement: "InfraPlatform"
     default_filter: name__value
     human_friendly_id: ["name__value"]
     order_by:
