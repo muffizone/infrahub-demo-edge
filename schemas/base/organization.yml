@@ -32,7 +32,6 @@ generics:
         optional: true
         peer: InfraAutonomousSystem
         order_weight: 2000
-
 nodes:
   - name: Manufacturer
     namespace: Organization

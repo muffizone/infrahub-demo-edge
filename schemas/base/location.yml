@@ -78,33 +78,38 @@ nodes:
       - name: city
         kind: Text
         optional: true
+        label: City
       - name: physical_address
         kind: Text
         optional: true
+        label: "Physical Address"
       - name: shipping_address
         kind: Text
         optional: true
+        label: "Shipping Address"
       - name: gps_coordinates
         kind: Text
         optional: true
-      - name: helper_address
+        label: "GPS Co-ordinates"
+      - name: ip_helper_address
         kind: IPHost
         optional: true
-      - name: contact
-        kind: Text
-        optional: true
+        label: "IP Helper Address"
       - name: alias
         kind: Text
         optional: false
       - name: cmdb_label
         kind: Text
         optional: true
-      - name: communities
+        label: "CMDB label"
+      - name: bgp_communities
         kind: Text
         optional: true
+        label: "BGP Communities"
       - name: activated_date
         kind: DateTime
         optional: false
+        label: "Activated Date"
       - name: status
         kind: Dropdown
         optional: false
@@ -153,6 +158,11 @@ nodes:
         identifier: "site__type"
         cardinality: one
         peer: LocationType
+        kind: Attribute
+      - name: contact
+        identifier: "site__contact"
+        cardinality: many
+        peer: ContactDetail
         kind: Attribute
   - name: Room
     label: "Room"
@@ -205,15 +215,15 @@ nodes:
     inherit_from:
       - "LocationGeneric"
     order_by:
-      - "site__name__value"
+      - "room"
       - "name__value"
     display_labels:
       - "name__value"
     parent: "LocationRoom"
     children: ""
     uniqueness_constraints:
-      - ["site", "room", "name__value"]
-    human_friendly_id: ["site__name__value", "name__value"]
+      - ["room", "name__value"]
+    human_friendly_id: ["room__name__value", "name__value"]
     attributes:
       - name: name
         kind: Text

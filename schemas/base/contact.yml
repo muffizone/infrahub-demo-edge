@@ -1,0 +1,29 @@
+# yaml-language-server: $schema=https://schema.infrahub.app/infrahub/schema/latest.json
+---
+version: "1.0"
+nodes:
+  - name: Detail
+    namespace: Contact
+    label: Contact Details
+    include_in_menu: true
+    icon: "mdi:contact"
+    display_labels:
+      - name__value
+    human_friendly_id: ["name__value", "email__value"]
+    attributes:
+      - name: name
+        kind: Text
+        optional: false
+      - name: role
+        kind: Text
+        optional: true
+      - name: email
+        kind: Email
+        unique: true
+        optional: false
+      - name: phone
+        kind: Text
+        optional: true
+      - name: comment
+        kind: TextArea
+        optional: true
