@@ -21,6 +21,17 @@ generics:
       - name: description
         kind: Text
         optional: true
+      - name: serial_number
+        kind: Text
+        optional: true
+      - name: rack_start
+        label: Rack Position Start
+        kind: Text
+        optional: true
+      - name: rack_end
+        label: Rack Position End
+        kind: Text
+        optional: true
       - name: device_type
         kind: Dropdown
         optional: true
@@ -34,7 +45,7 @@ generics:
             description: "Console server used for OOB network"
             color: "#bf7fbf"
           - name: server
-            label: Edge servers/caches
+            label: Server
             description: "Servers in edge clusters"
             color: "#bf7f7f"
           - name: patch_panel
@@ -312,6 +323,25 @@ nodes:
             label: Console
             description: "Console server"
             color: "#bf7fbf"
+  - name: Server
+    namespace: Infra
+    description: "Generic Server object"
+    label: "Server"
+    icon: "mdi:server"
+    menu_placement: "InfraDevice"
+    inherit_from:
+      - "CoreArtifactTarget"
+      - "InfraDevice"
+    attributes:
+      - name: device_type
+        kind: Dropdown
+        default_value: "server"
+        optional: true
+        choices:
+          - name: console
+            label: Console
+            description: "Console server"
+            color: "#bf7f7f"
 
   - name: InterfaceL3
     namespace: Infra
